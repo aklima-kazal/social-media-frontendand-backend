@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Color Variables */
+
+:root {
+  --main_bg: #fff;
+  --primary_bg: #66717f;
+  --secondary_bg: #28353e;
+  --input_color: #e4e6eb21;
+  --hover_color: #e4e6eb;
+  --line_color: #f5f0f5b6;
+  --page_color: #f7f7fb;
+  --single_color: rgba(88, 145, 219, 0.973);
+  --blur: rgba(233, 235, 238, 0.8);
+  --text_color: #333;
+  --primary_color: #1fa0f8;
+  --title_color: #66717f;
+  --black_color: #29313d;
+  --white_color: #fff;
+  --green: #21d997;
+  --red: #fc4a1a;
+  --blue: #5093e2;
+  --yellow: #d9a94a;
+  --purple-100: #f3e8ff;
+  --pink-100: #fff0f8;
+  --cyan-100: #cffafe;
+}
+
+/* font faces */
+
+@font-face {
+  font-family: "Blinker Regular";
+  src: url(./assets/fonts/Blinker-Regular.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Blinker Black";
+  src: url(./assets/fonts/Blinker-Black.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Blinker Bold";
+  src: url(./assets/fonts/Blinker-Bold.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Blinker Light";
+  src: url(./assets/fonts/Blinker-Light.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Blinker Medium";
+  src: url(./assets/fonts/Blinker-Medium.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Blinker SemiBold";
+  src: url(./assets/fonts/Blinker-SemiBold.ttf) format("truetype");
+}
