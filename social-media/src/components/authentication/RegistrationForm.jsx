@@ -9,9 +9,9 @@ const RegistrationForm = () => {
     lName: "",
     email: "",
     password: "",
-    bYear: "",
-    bMonth: "",
-    bDay: "",
+    bYear: new Date().getFullYear(),
+    bMonth: new Date().getMonth() + 1,
+    bDay: new Date().getDate(),
     gender: "",
   };
 
@@ -22,6 +22,14 @@ const RegistrationForm = () => {
       console.log("form data");
     },
   });
+
+  const tempYears = new Date().getFullYear();
+  const years = Array.from(new Array(105), (val, index) => tempYears - index);
+  const month = Array.from(new Array(12), (val, index) => index + 1);
+  const day = () => {
+    return new Date(formik.values.bYear, formik.values.bMonth, 0).getDate();
+  };
+  const getDates = Array.from(new Array(day()), (val, index) => 1 + index);
 
   const { errors, touched } = formik;
 
@@ -142,21 +150,24 @@ const RegistrationForm = () => {
           <div className="flex gap-x-6 mt-4 ">
             <select className="border border-line_color rounded-md p-2 bg-input_color text-text_color font-blinkerMedium text-lg w-[33%]">
               <option> Year</option>
-              <option>1993</option>
-              <option>1994</option>
-              <option>1995</option>
+
+              {years.map((year, index) => (
+                <option key={index}>{year}</option>
+              ))}
             </select>
             <select className="border border-line_color rounded-md p-2 bg-input_color text-text_color font-blinkerMedium text-lg w-[33%]">
               <option> Month</option>
-              <option>January</option>
-              <option>February</option>
-              <option>March</option>
+
+              {month?.map((month, index) => (
+                <option key={index}>{month}</option>
+              ))}
             </select>
+
             <select className="border border-line_color rounded-md p-2 bg-input_color text-text_color font-blinkerMedium text-lg w-[33%]">
               <option> Day</option>
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
+              {getDates?.map((date, index) => (
+                <option key={index}>{date}</option>
+              ))}
             </select>
           </div>
         </div>
