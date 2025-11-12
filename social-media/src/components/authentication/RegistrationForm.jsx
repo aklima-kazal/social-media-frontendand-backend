@@ -1,35 +1,52 @@
 import { useFormik } from "formik";
-import React, { use } from "react";
 import { Link } from "react-router-dom";
 import { signUp } from "../../validation";
+import { useState } from "react";
+import DateOfBirth from "./DateOfBirth";
+import Gender from "./Gender";
 
+const initialState = {
+  fName: "",
+  lName: "",
+  email: "",
+  password: "",
+  bYear: new Date().getFullYear(),
+  bMonth: new Date().getMonth() + 1,
+  bDay: new Date().getDate(),
+  gender: "",
+};
 const RegistrationForm = () => {
-  const initialState = {
-    fName: "",
-    lName: "",
-    email: "",
-    password: "",
-    bYear: new Date().getFullYear(),
-    bMonth: new Date().getMonth() + 1,
-    bDay: new Date().getDate(),
-    gender: "",
-  };
+  const [ageError, setAgeError] = useState("");
 
   const formik = useFormik({
     initialValues: initialState,
     validationSchema: signUp,
     onSubmit: () => {
-      console.log("form data");
+      const currentDate = new Date();
+      const pickedDate = new Date(
+        formik.values.bYear,
+        formik.values.bMonth - 1,
+        formik.values.bDay
+      );
+      const adult = new Date(1970 + 18, 0, 1);
+      const tooOld = new Date(1970 + 70, 0, 1);
+
+      if (currentDate - pickedDate < adult) {
+        return setAgeError("Your age must be  18 years old");
+      } else if (currentDate - pickedDate > tooOld) {
+        return setAgeError("Your age must be less than 70 years old");
+      }
     },
   });
 
   const tempYears = new Date().getFullYear();
   const years = Array.from(new Array(105), (val, index) => tempYears - index);
-  const month = Array.from(new Array(12), (val, index) => index + 1);
+  const month = Array.from(new Array(12), (val, index) => 1 + index);
   const day = () => {
     return new Date(formik.values.bYear, formik.values.bMonth, 0).getDate();
   };
   const getDates = Array.from(new Array(day()), (val, index) => 1 + index);
+  console.log(getDates);
 
   const { errors, touched } = formik;
 
@@ -116,60 +133,14 @@ const RegistrationForm = () => {
         )}
 
         <div className="mt-3 mb-4 ">
-          <input
-            id="Male"
-            type="radio"
-            name="gender"
-            value="male"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            autoComplete="off"
+          <Gender formik={formik} errors={errors} touched={touched} />
+          <DateOfBirth
+            ageError={ageError}
+            formik={formik}
+            years={years}
+            month={month}
+            getDates={getDates}
           />
-          <label htmlFor="Male" className="text-lg font-blinkerMedium ml-2">
-            Male
-          </label>
-
-          <input
-            id="Female"
-            type="radio"
-            name="gender"
-            value="female"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            autoComplete="off"
-            className="ml-4"
-          />
-          <label htmlFor="Female" className="text-lg font-blinkerMedium ml-2">
-            Female
-          </label>
-          {errors.gender && touched.gender && (
-            <p className="text-red text-base mb-2 font-blinkerMedium ">
-              {errors.gender}
-            </p>
-          )}
-          <div className="flex gap-x-6 mt-4 ">
-            <select className="border border-line_color rounded-md p-2 bg-input_color text-text_color font-blinkerMedium text-lg w-[33%]">
-              <option> Year</option>
-
-              {years.map((year, index) => (
-                <option key={index}>{year}</option>
-              ))}
-            </select>
-            <select className="border border-line_color rounded-md p-2 bg-input_color text-text_color font-blinkerMedium text-lg w-[33%]">
-              <option> Month</option>
-
-              {month?.map((month, index) => (
-                <option key={index}>{month}</option>
-              ))}
-            </select>
-
-            <select className="border border-line_color rounded-md p-2 bg-input_color text-text_color font-blinkerMedium text-lg w-[33%]">
-              <option> Day</option>
-              {getDates?.map((date, index) => (
-                <option key={index}>{date}</option>
-              ))}
-            </select>
-          </div>
         </div>
 
         <div className="sm:flex items-center justify-between text-center mt-6 ">
