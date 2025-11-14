@@ -4,7 +4,7 @@ const {
   validationLength,
   validateUsername,
 } = require("../helpers/validation");
-const bycrypt = require("bcrypt");
+const bcrypt = require("bcrypt");
 const { jwtToken } = require("../helpers/token");
 
 exports.newUser = async (req, res) => {
@@ -49,7 +49,7 @@ exports.newUser = async (req, res) => {
 
     // bycrypt password
 
-    const crypted = await bycrypt.hash(password, 10);
+    const crypted = await bcrypt.hash(password, 10);
 
     // validate username
 
@@ -70,9 +70,22 @@ exports.newUser = async (req, res) => {
     }).save();
 
     const emailToken = jwtToken({ id: user._id.toString() }, "30m");
-    console.log(emailToken);
+    const url = `${process.env.BASE_URL}/activate/${emailToken}`;
 
-    res.send(user);
+    sendVerificationEmail(user.email, user.fName, url);
+
+    const token = jwtToken({ id: user._id.toString() }, "7d");
+
+    res.send({
+      id: user._id,
+      username: user.username,
+      fName: user.fName,
+      lName: user.lName,
+      profilePicture: user.profilePicture,
+      verified: user.verified,
+      token,
+      message: "User created successfully",
+    });
   } catch (error) {
     res.status(404).json({ message: "something went wrong" });
   }
