@@ -2,8 +2,8 @@ const nodemailer = require("nodemailer");
 const { google } = require("googleapis");
 const { OAuth2 } = google.auth;
 
-const oauth_link = "https://developer.google.com/oauthplayground";
-const { MAILING_ID, MAILING_SECRECT, MAILING_REFRESH_TOKEN, EMAIL } =
+const oauth_link = "https://developers.google.com/oauthplayground";
+const { EMAIL, MAILING_ID, MAILING_SECRECT, MAILING_REFRESH_TOKEN } =
   process.env;
 
 const auth = new OAuth2(
@@ -12,7 +12,7 @@ const auth = new OAuth2(
   MAILING_REFRESH_TOKEN,
   oauth_link
 );
-exports.sendVerificationEmail = (name, email, url) => {
+exports.sendVerifiedEmail = (email, name, url) => {
   auth.setCredentials({
     refresh_token: MAILING_REFRESH_TOKEN,
   });

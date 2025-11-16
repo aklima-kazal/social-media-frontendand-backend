@@ -6,6 +6,8 @@ const {
 } = require("../helpers/validation");
 const bcrypt = require("bcrypt");
 const { jwtToken } = require("../helpers/token");
+const { sendVerifiedEmail } = require("../helpers/mailer");
+const jwt = require("jsonwebtoken");
 
 exports.newUser = async (req, res) => {
   try {
@@ -59,8 +61,8 @@ exports.newUser = async (req, res) => {
     const user = await new Users({
       fName,
       lName,
-      username: finalUsername,
       email,
+      username: finalUsername,
       password: crypted,
       bMonth,
       bDay,
@@ -72,7 +74,7 @@ exports.newUser = async (req, res) => {
     const emailToken = jwtToken({ id: user._id.toString() }, "30m");
     const url = `${process.env.BASE_URL}/activate/${emailToken}`;
 
-    sendVerificationEmail(user.email, user.fName, url);
+    sendVerifiedEmail(user.email, user.fName, url);
 
     const token = jwtToken({ id: user._id.toString() }, "7d");
 
@@ -83,10 +85,31 @@ exports.newUser = async (req, res) => {
       lName: user.lName,
       profilePicture: user.profilePicture,
       verified: user.verified,
-      token,
+      token: token,
       message: "User created successfully",
     });
   } catch (error) {
-    res.status(404).json({ message: "something went wrong" });
+    console.log(error);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+exports.verifiedUser = async (req, res) => {
+  try {
+    const { token } = req.body;
+    const user = jwt.verify(token, process.env.SECRET_TOKEN);
+    const check = await Users.findById(user.id);
+    if (check.verified === true) {
+      return res
+        .status(400)
+        .json({ message: "This account is already verified." });
+    } else {
+      await Users.findByIdAndUpdate(user.id, { verified: true });
+      res
+        .status(200)
+        .json({ message: "Account has been verified successfully." });
+    }
+  } catch (error) {
+    res.status(400).json({ message: error.message });
   }
 };

@@ -4,6 +4,7 @@ import { signUp } from "../../validation";
 import { useState } from "react";
 import DateOfBirth from "./DateOfBirth";
 import Gender from "./Gender";
+import { useAddUserMutation } from "../../feature/api/authApi";
 
 const initialState = {
   fName: "",
@@ -17,6 +18,21 @@ const initialState = {
 };
 const RegistrationForm = () => {
   const [ageError, setAgeError] = useState("");
+  const [addUser, { isLoading }] = useAddUserMutation();
+
+  const registration = async () => {
+    const signUpMutation = await addUser({
+      fName: formik.values.fName,
+      lName: formik.values.lName,
+      email: formik.values.email,
+      password: formik.values.password,
+      bYear: formik.values.bYear,
+      bMonth: formik.values.bMonth,
+      bDay: formik.values.bDay,
+      gender: formik.values.gender,
+    });
+    console.log(signUpMutation.data);
+  };
 
   const formik = useFormik({
     initialValues: initialState,
@@ -36,6 +52,7 @@ const RegistrationForm = () => {
       } else if (currentDate - pickedDate > tooOld) {
         return setAgeError("Your age must be less than 70 years old");
       }
+      registration();
     },
   });
 
@@ -46,7 +63,6 @@ const RegistrationForm = () => {
     return new Date(formik.values.bYear, formik.values.bMonth, 0).getDate();
   };
   const getDates = Array.from(new Array(day()), (val, index) => 1 + index);
-  console.log(getDates);
 
   const { errors, touched } = formik;
 
