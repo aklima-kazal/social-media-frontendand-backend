@@ -1,11 +1,12 @@
 import React from "react";
-import LeftAuth from "../../components/authentication/LeftAuth";
-import { RegistrationIcon } from "../../svg/RegistrationIcon";
-import RegistrationForm from "../../components/authentication/RegistrationForm";
 import { Helmet } from "react-helmet-async";
 import { ToastContainer, toast } from "react-toastify";
+import { RegistrationIcon } from "../../svg/RegistrationIcon";
+import LoginForm from "../../components/authentication/LoginForm";
+import LeftAuth from "../../components/authentication/LeftAuth";
+import { LoginIcon } from "../../svg/LoginIcon";
 
-const Registration = () => {
+const Login = () => {
   return (
     <>
       <ToastContainer />
@@ -17,13 +18,13 @@ const Registration = () => {
         <div className="flex justify-center items-center h-screen container gap-x-6 xl:gap-x-10">
           <div className="hidden lg:block w-[40%] xl:w-[45%]">
             <LeftAuth
-              icon={<RegistrationIcon />}
-              title="Start Your Journey"
-              description="Welcome to the registration page! Create your account and start your journey with us today. We’re here to make everything easy, smooth, and enjoyable for you. No matter what you need, you can count on us every step of the way. Join our community and become a special part of our growing family!"
+              icon={<LoginIcon />}
+              title="Login To Your Account"
+              description="Welcome to the login page. Sign in to your account and start your journey with us. We are committed to making your experience easier, smoother, and more enjoyable. You can rely on us every step of the way. Become a valued member of our growing family."
             />
           </div>
           <div className="w-full lg:w-[45%] xl:w-[35%]">
-            <RegistrationForm toast={toast} />
+            <LoginForm toast={toast} />
           </div>
         </div>
       </div>
@@ -31,4 +32,4 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+export default Login;

@@ -113,3 +113,32 @@ exports.verifiedUser = async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 };
+
+exports.login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await Users.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ message: "Email does not exist." });
+    }
+    const check = await bcrypt.compare(password, user.password);
+    if (!check) {
+      return res
+        .status(400)
+        .json({ message: "Invalid credentials, please try again" });
+    }
+    const token = jwtToken({ id: user._id.toString() }, "7d");
+    res.send({
+      id: user._id,
+      username: user.username,
+      fName: user.fName,
+      lName: user.lName,
+      profilePicture: user.profilePicture,
+      verified: user.verified,
+      token: token,
+      message: "User created successfully",
+    });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};

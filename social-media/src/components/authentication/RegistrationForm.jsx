@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signUp } from "../../validation";
-import { useState } from "react";
+import { use, useState } from "react";
 import DateOfBirth from "./DateOfBirth";
 import Gender from "./Gender";
 import { useAddUserMutation } from "../../feature/api/authApi";
@@ -16,9 +16,10 @@ const initialState = {
   bDay: new Date().getDate(),
   gender: "",
 };
-const RegistrationForm = () => {
+const RegistrationForm = ({ toast }) => {
   const [ageError, setAgeError] = useState("");
   const [addUser, { isLoading }] = useAddUserMutation();
+  const navigate = useNavigate();
 
   const registration = async () => {
     const signUpMutation = await addUser({
@@ -31,7 +32,28 @@ const RegistrationForm = () => {
       bDay: formik.values.bDay,
       gender: formik.values.gender,
     });
-    console.log(signUpMutation.data);
+
+    if (signUpMutation?.data) {
+      toast.success(signUpMutation?.data?.message, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        theme: "light",
+      });
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
+    } else if (signUpMutation?.error) {
+      toast.error(signUpMutation?.error?.data?.message, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        theme: "light",
+      });
+    }
+    console.log();
   };
 
   const formik = useFormik({
@@ -53,6 +75,8 @@ const RegistrationForm = () => {
         return setAgeError("Your age must be less than 70 years old");
       }
       registration();
+      formik.resetForm();
+      setAgeError("");
     },
   });
 
