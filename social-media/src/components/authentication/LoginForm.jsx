@@ -2,8 +2,9 @@ import { useFormik } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import { signIn } from "../../validation";
 import { useLoggedInUserMutation } from "../../feature/api/authApi";
-import { toast } from "react-toastify";
 import BeatLoader from "react-spinners/BeatLoader";
+import { useDispatch } from "react-redux";
+import { loggedInUsers } from "../../feature/users/authSlice";
 
 const initialState = {
   email: "",
@@ -12,6 +13,7 @@ const initialState = {
 const LoginForm = ({ toast }) => {
   const [loggedInUser, { isLoading }] = useLoggedInUserMutation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const loginUser = async () => {
     const loginMutation = await loggedInUser({
       email: formik.values.email,
@@ -27,8 +29,11 @@ const LoginForm = ({ toast }) => {
       });
       return;
     }
+    const { message, ...rest } = loginMutation?.data;
+    localStorage.setItem("user", JSON.stringify(rest));
+    dispatch(loggedInUsers(rest));
+
     navigate("/");
-    formik.resetForm();
   };
 
   const formik = useFormik({
@@ -36,6 +41,7 @@ const LoginForm = ({ toast }) => {
     validationSchema: signIn,
     onSubmit: () => {
       loginUser();
+      formik.resetForm();
     },
   });
 
