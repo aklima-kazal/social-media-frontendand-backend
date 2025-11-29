@@ -1,6 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
 import LeftPart from "../../components/HomeComponents/LeftPart";
+import HomePost from "../../components/HomeComponents/HomePost";
 
 const Home = () => {
   return (
@@ -9,11 +10,13 @@ const Home = () => {
         <title>Home</title>
       </Helmet>
 
-      <div className="grid grid-cols-[1fr_3fr_1fr] mx-20">
-        <div className="mt-9 bg-pink-100 p-2">
+      <div className="grid grid-cols-[1fr_3fr_1fr] mx-20 mt-8 gap-x-8">
+        <div className="  p-3 ">
           <LeftPart />
         </div>
-        <div>2</div>
+        <div>
+          <HomePost />
+        </div>
         <div>3</div>
       </div>
     </>

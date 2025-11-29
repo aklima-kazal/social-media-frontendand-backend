@@ -8,9 +8,7 @@ const LeftProfile = () => {
         <h1 className="font-blinkerBold text-2xl text-text_color">
           Aklima Akter Kazal
         </h1>
-        <p className="font-blinkerNormal text-xl text-text_color">
-          example@gmail.com
-        </p>
+        <p className=" text-sm text-primary_bg">example@gmail.com</p>
       </div>
     </>
   );
