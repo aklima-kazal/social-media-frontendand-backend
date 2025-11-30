@@ -10,7 +10,7 @@ const DateOfBirth = ({ years, month, getDates, formik, ageError }) => {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           autoComplete="off"
-          className="border border-line_color rounded-md p-2 bg-input_color text-text_color font-blinkerMedium text-lg w-[33%]"
+          className="border border-line_color rounded-md p-2 bg-input_color text-text_color font-blinker font-medium text-lg w-[33%]"
         >
           <option> Year</option>
 
@@ -24,7 +24,7 @@ const DateOfBirth = ({ years, month, getDates, formik, ageError }) => {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           autoComplete="off"
-          className="border border-line_color rounded-md p-2 bg-input_color text-text_color font-blinkerMedium text-lg w-[33%]"
+          className="border border-line_color rounded-md p-2 bg-input_color text-text_color font-blinker font-medium text-lg w-[33%]"
         >
           <option> Month</option>
 
@@ -39,7 +39,7 @@ const DateOfBirth = ({ years, month, getDates, formik, ageError }) => {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           autoComplete="off"
-          className="border border-line_color rounded-md p-2 bg-input_color text-text_color font-blinkerMedium text-lg w-[33%]"
+          className="border border-line_color rounded-md p-2 bg-input_color text-text_color font-blinker font-medium text-lg w-[33%]"
         >
           <option> Day </option>
           {getDates?.map((date, index) => (
@@ -48,7 +48,7 @@ const DateOfBirth = ({ years, month, getDates, formik, ageError }) => {
         </select>
       </div>
       {ageError && (
-        <p className="text-red text-base mb-2 font-blinkerMedium mt-2 ">
+        <p className="text-red text-base mb-2 font-blinker font-medium mt-2 ">
           {ageError}
         </p>
       )}

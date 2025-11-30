@@ -8,19 +8,23 @@ export const LeftData = [
   {
     icon: NewsFeed,
     title: "News Feed",
+    to: "/",
   },
 
   {
     icon: Messages,
     title: "Messages",
+    to: "/messages",
   },
   {
     icon: Friends,
     title: "Friends",
+    to: "/friends",
   },
   {
     icon: Media,
     title: "Media",
+    to: "/media",
   },
   {
     icon: Settings,

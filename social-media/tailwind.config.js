@@ -2,6 +2,9 @@
 export default {
   content: ["./src/**/*.{html,js,jsx}"],
   theme: {
+    fontFamily: {
+      blinker: ["var(--blinker)"],
+    },
     colors: {
       main_bg: "var(--main_bg)",
       primary_bg: "var(--primary_bg)",
@@ -26,14 +29,14 @@ export default {
       "cyan-100": "var(--cyan-100)",
     },
 
-    fontFamily: {
-      blinkerNormal: ["Blinker Regular"],
-      blinkerMedium: ["Blinker Medium"],
-      blinkerBold: ["Blinker Bold"],
-      blinkerLight: ["Blinker Light"],
-      blinkerBlack: ["Blinker Black"],
-      blinkerSemiBold: ["Blinker SemiBold"],
-    },
+    // fontFamily: {
+    //   blinkerNormal: ["Blinker Regular"],
+    //   blinkerMedium: ["Blinker Medium"],
+    //   blinkerBold: ["Blinker Bold"],
+    //   blinkerLight: ["Blinker Light"],
+    //   blinkerBlack: ["Blinker Black"],
+    //   blinkerSemiBold: ["Blinker SemiBold"],
+    // },
     extend: {
       screens: {
         xs: "320px",

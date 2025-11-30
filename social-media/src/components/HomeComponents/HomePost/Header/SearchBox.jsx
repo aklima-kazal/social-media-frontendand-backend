@@ -12,7 +12,12 @@ const SearchBox = () => {
     <>
       <div className=" max-w-[100vh] min-h-[70vh] shadow-lg bg-page_color p-7 rounded-lg ">
         <div className="flex items-center  rounded-full border-input_color border px-6 py-3 shadow-lg gap-x-4">
-          <div className="text-input_color">{showIcon && <SearchBar />}</div>
+          <div
+            className="text-input_color"
+            onClick={() => inputBox.current.focus()}
+          >
+            {showIcon && <SearchBar />}
+          </div>
           <div className="flex items-center gap-x-2  ">
             <input
               ref={inputBox}
@@ -22,8 +27,10 @@ const SearchBox = () => {
               onFocus={() => setShowIcon(false)}
               onBlur={() => setShowIcon(true)}
             />
-            <div>d</div>
           </div>
+        </div>
+        <div className="mt-4">
+          <p className="text-base font-blinker ">Recent Searches</p>
         </div>
       </div>
     </>

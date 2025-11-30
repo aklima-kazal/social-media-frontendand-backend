@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Blinker:wght@100;200;300;400;600;700;800;900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,6 +6,7 @@
 /* Color Variables */
 
 :root {
+  --blinker: "Blinker", sans-serif;
   --main_bg: #fff;
   --primary_bg: #66717f;
   --secondary_bg: #28353e;
@@ -30,7 +32,7 @@
 
 /* font faces */
 
-@font-face {
+/* @font-face {
   font-family: "Blinker Regular";
   src: url(./assets/fonts/Blinker-Regular.ttf) format("truetype");
 }
@@ -53,4 +55,4 @@
 @font-face {
   font-family: "Blinker SemiBold";
   src: url(./assets/fonts/Blinker-SemiBold.ttf) format("truetype");
-}
+} */
