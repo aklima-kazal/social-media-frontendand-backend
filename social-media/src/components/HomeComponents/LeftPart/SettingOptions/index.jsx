@@ -1,21 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
+import { Logout } from "../../../../svg/Logout";
+import { Moon } from "../../../../svg/Moon";
+import DisplayMood from "./DisplayMood";
 
 const SettingOptions = () => {
+  const [visible, setVisible] = useState(false);
+
+  if (visible) {
+    return <DisplayMood />;
+  }
   return (
     <>
       <div>
         <ul>
-          <li className="flex gap-x-3 ">
-            <div>icon</div>
+          <li
+            className="flex gap-x-2 mb-4 items-center cursor-pointer group"
+            onClick={() => setVisible(true)}
+          >
+            <div className="bg-hover_color rounded-full p-2 h-10 w-10 flex items-center justify-center ">
+              <Moon />
+            </div>
 
             <div>
-              <p className="font-blinker font-semibold text-base">Display</p>
+              <p className="font-blinker font-semibold text-base group-hover:bg-hover_color group-hover:text-white px-2 py-1 rounded-md">
+                Display & Accessability
+              </p>
             </div>
           </li>
-          <li className="flex gap-x-3 ">
-            <div>icon</div>
+          <li className="flex gap-x-2 items-center cursor-pointer group">
+            <div className="bg-hover_color rounded-full p-2 h-10 w-10 flex items-center justify-center">
+              <Logout />
+            </div>
             <div>
-              <p className="font-blinker font-semibold text-base">Logout</p>
+              <p className="font-blinker font-semibold text-base group-hover:bg-hover_color group-hover:text-white px-2 py-1 rounded-md">
+                Logout
+              </p>
             </div>
           </li>
         </ul>

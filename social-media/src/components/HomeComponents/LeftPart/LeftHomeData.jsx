@@ -22,7 +22,7 @@ const LeftHomeData = ({ data }) => {
             </h1>
           </div>
         </div>
-        <div className="absolute top-20 left-[20px] w-[200px] shadow-lg bg-page_color rounded-lg p-4 mb-11">
+        <div className="absolute top-20 left-[20px] w-[260px] shadow-lg bg-page_color rounded-lg p-4 mb-11">
           {showSettings && <SettingOptions />}
         </div>
       </div>

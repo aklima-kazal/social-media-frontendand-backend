@@ -11,7 +11,7 @@ const Home = () => {
       </Helmet>
 
       <div className="grid grid-cols-[1fr_3fr_1fr] mx-20 mt-8 gap-x-8">
-        <div className="  p-3 ">
+        <div className="mb-40  p-3 ">
           <LeftPart />
         </div>
         <div>
