@@ -12,13 +12,16 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import NotLoggedInUser from "./pages/privateRouter/NotLoggedInUser";
 import LoggedInUser from "./pages/privateRouter/LoggedInUser";
+import RootLayout from "./components/RootLayout";
 
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route>
         <Route element={<LoggedInUser />}>
-          <Route path="/" element={<Home />} />
+          <Route element={<RootLayout />}>
+            <Route path="/" element={<Home />} />
+          </Route>
         </Route>
         <Route element={<NotLoggedInUser />}>
           <Route path="/registration" element={<Registration />} />

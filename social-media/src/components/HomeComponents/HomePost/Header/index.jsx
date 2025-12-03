@@ -18,10 +18,10 @@ const Header = () => {
         </div>
         <div className="w-1/3 relative ">
           <div
-            className="flex items-center  rounded-full border-input_color border px-8 py-3 shadow-lg gap-x-4"
+            className="flex items-center rounded-full border-primary_bg border px-8 py-3 shadow-lg gap-x-4"
             onClick={() => setShow(true)}
           >
-            <div className="text-input_color" ref={OutSideClick}>
+            <div className="text-primary_bg" ref={OutSideClick}>
               <SearchBar />
             </div>
             <div className="flex items-center gap-x-2  ">

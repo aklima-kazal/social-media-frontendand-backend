@@ -1,13 +1,22 @@
 import React from "react";
 import { Moon } from "../../../../svg/Moon";
+import { BackIcon } from "../../../../svg/backIcon";
 
-const DisplayMood = () => {
+const DisplayMood = ({ setVisible }) => {
   return (
     <>
-      <div className="">
-        <h1 className="text-center text-lg font-blinker font-semibold">
-          Display & Accessibility Settings
-        </h1>
+      <div className="w-[300px] rounded-md shadow-lg bg-page_color p-3">
+        <div className="flex items-center gap-x-2 ">
+          <div
+            onClick={() => setVisible(false)}
+            className=" cursor-pointer bg-hover_color rounded-full p-2 h-9 w-9 flex items-center justify-center "
+          >
+            <BackIcon />
+          </div>
+          <h1 className="text-center text-lg font-blinker font-semibold">
+            Display & Accessibility Settings
+          </h1>
+        </div>
         <div className="flex gap-x-4 mb-4  cursor-pointer group mt-5">
           <div className="bg-hover_color rounded-full p-2 h-10 w-10 flex items-center justify-center ">
             <Moon />
@@ -20,16 +29,36 @@ const DisplayMood = () => {
             <p className="font-blinker font-normal text-base text-text_color ">
               Lorem ipsum dolor sit amet consectetur
             </p>
-          </div>
-        </div>
-        <div>
-          <div className="flex items-center justify-between mb-4">
-            <label className="font-blinker font-semibold text-base">on</label>
-            <input type="radio" className="cursor-pointer" />
-          </div>
-          <div className="flex items-center justify-between">
-            <label className="font-blinker font-semibold text-base">off</label>
-            <input type="radio" className=" cursor-pointer" />
+            <div className="mt-4  ">
+              <div className="flex items-center justify-between mb-3">
+                <label
+                  htmlFor="white"
+                  className="font-blinker font-semibold text-base"
+                >
+                  on
+                </label>
+                <input
+                  id="white"
+                  type="radio"
+                  name="darkMood"
+                  className="cursor-pointer"
+                />
+              </div>
+              <div className="flex items-center justify-between">
+                <label
+                  htmlFor="dark"
+                  className="font-blinker font-semibold text-base"
+                >
+                  off
+                </label>
+                <input
+                  id="dark"
+                  name="darkMood"
+                  type="radio"
+                  className=" cursor-pointer"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>

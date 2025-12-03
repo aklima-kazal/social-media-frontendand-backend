@@ -7,11 +7,11 @@ const SettingOptions = () => {
   const [visible, setVisible] = useState(false);
 
   if (visible) {
-    return <DisplayMood />;
+    return <DisplayMood setVisible={setVisible} />;
   }
   return (
     <>
-      <div>
+      <div className="p-3">
         <ul>
           <li
             className="flex gap-x-2 mb-4 items-center cursor-pointer group"
@@ -22,7 +22,7 @@ const SettingOptions = () => {
             </div>
 
             <div>
-              <p className="font-blinker font-semibold text-base group-hover:bg-hover_color group-hover:text-white px-2 py-1 rounded-md">
+              <p className="font-blinker font-semibold text-base group-hover:text-primary_bg px-2 py-1 rounded-md">
                 Display & Accessability
               </p>
             </div>
@@ -32,7 +32,7 @@ const SettingOptions = () => {
               <Logout />
             </div>
             <div>
-              <p className="font-blinker font-semibold text-base group-hover:bg-hover_color group-hover:text-white px-2 py-1 rounded-md">
+              <p className="font-blinker font-semibold text-base group-hover:text-primary_bg px-2 py-1 rounded-md">
                 Logout
               </p>
             </div>

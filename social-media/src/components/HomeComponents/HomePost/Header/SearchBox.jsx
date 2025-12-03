@@ -11,9 +11,9 @@ const SearchBox = () => {
   return (
     <>
       <div className=" max-w-[100vh] min-h-[70vh] shadow-lg bg-page_color p-7 rounded-lg ">
-        <div className="flex items-center  rounded-full border-input_color border px-6 py-3 shadow-lg gap-x-4">
+        <div className="flex items-center  rounded-full border-primary_bg border px-6 py-3 shadow-lg gap-x-4">
           <div
-            className="text-input_color"
+            className="text-primary_bg"
             onClick={() => inputBox.current.focus()}
           >
             {showIcon && <SearchBar />}

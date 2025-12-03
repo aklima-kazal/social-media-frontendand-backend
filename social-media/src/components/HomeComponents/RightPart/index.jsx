@@ -1,7 +1,12 @@
 import React from "react";
+import RightFriends from "./RightFriends";
 
-const RightPart = () => {
-  return <div>RightPart</div>;
+const RightHome = () => {
+  return (
+    <>
+      <RightFriends />
+    </>
+  );
 };
 
-export default RightPart;
+export default RightHome;
