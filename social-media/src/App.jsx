@@ -13,6 +13,7 @@ import Login from "./pages/Login";
 import NotLoggedInUser from "./pages/privateRouter/NotLoggedInUser";
 import LoggedInUser from "./pages/privateRouter/LoggedInUser";
 import RootLayout from "./components/RootLayout";
+import "swiper/css";
 
 function App() {
   const router = createBrowserRouter(
