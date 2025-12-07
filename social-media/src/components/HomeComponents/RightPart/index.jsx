@@ -5,11 +5,13 @@ import Stories from "./Stories";
 const RightHome = () => {
   return (
     <>
-      <div>
-        <RightFriends />
-      </div>
-      <div>
-        <Stories />
+      <div className=" hidden lg:block ">
+        <div>
+          <RightFriends />
+        </div>
+        <div>
+          <Stories />
+        </div>
       </div>
     </>
   );

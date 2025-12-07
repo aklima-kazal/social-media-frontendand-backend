@@ -13,7 +13,7 @@ const DisplayMood = ({ setVisible }) => {
           >
             <BackIcon />
           </div>
-          <h1 className="text-center text-lg font-blinker font-semibold">
+          <h1 className="text-center text-base lg:text-lg font-blinker font-semibold">
             Display & Accessibility Settings
           </h1>
         </div>
@@ -23,10 +23,10 @@ const DisplayMood = ({ setVisible }) => {
           </div>
 
           <div className=" ">
-            <h4 className="font-blinker font-semibold text-lg text-text_color">
+            <h4 className="font-blinker font-semibold text-base lg:text-lg text-text_color">
               Dark Mood
             </h4>
-            <p className="font-blinker font-normal text-base text-text_color ">
+            <p className="font-blinker font-normal text-sm lg:text-base text-text_color ">
               Lorem ipsum dolor sit amet consectetur
             </p>
             <div className="mt-4  ">

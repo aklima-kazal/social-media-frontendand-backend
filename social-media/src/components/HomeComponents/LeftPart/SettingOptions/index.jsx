@@ -22,7 +22,7 @@ const SettingOptions = () => {
             </div>
 
             <div>
-              <p className="font-blinker font-semibold text-base group-hover:text-primary_bg px-2 py-1 rounded-md">
+              <p className="font-blinker font-semibold text-sm lg:text-base group-hover:text-primary_bg px-2 py-1 rounded-md">
                 Display & Accessability
               </p>
             </div>
@@ -32,7 +32,7 @@ const SettingOptions = () => {
               <Logout />
             </div>
             <div>
-              <p className="font-blinker font-semibold text-base group-hover:text-primary_bg px-2 py-1 rounded-md">
+              <p className="font-blinker font-semibold text-sm lg:text-base group-hover:text-primary_bg px-2 py-1 rounded-md">
                 Logout
               </p>
             </div>

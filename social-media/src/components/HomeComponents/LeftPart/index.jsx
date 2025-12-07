@@ -6,7 +6,7 @@ import { LeftData } from "./Data";
 const LeftPart = () => {
   return (
     <>
-      <div className="">
+      <div className=" hidden lg:block ">
         <LeftProfile />
         <div className="mt-10 w-4/5 mx-auto mb-10">
           {LeftData.map((data, index) => (

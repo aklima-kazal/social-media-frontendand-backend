@@ -10,8 +10,8 @@ const SearchBox = () => {
   }, []);
   return (
     <>
-      <div className=" max-w-[100vh] min-h-[70vh] shadow-lg bg-page_color p-7 rounded-lg ">
-        <div className="flex items-center  rounded-full border-primary_bg border px-6 py-3 shadow-lg gap-x-4">
+      <div className="max-w-[100vh] min-h-[70vh] shadow-lg bg-white_color p-7 rounded-lg ">
+        <div className="flex items-center rounded-full border-primary_bg border px-6 py-3 shadow-lg gap-x-4">
           <div
             className="text-primary_bg"
             onClick={() => inputBox.current.focus()}
@@ -23,7 +23,7 @@ const SearchBox = () => {
               ref={inputBox}
               type="text"
               placeholder="Search"
-              className=" bg-page_color  outline-none  "
+              className=" bg-white_color w-[130px] outline-none  "
               onFocus={() => setShowIcon(false)}
               onBlur={() => setShowIcon(true)}
             />
