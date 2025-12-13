@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { CircleCloseIcon } from "../../../../svg/CircleClose";
 import AddPost from "./AddPost";
-import EmojiPicker from "emoji-picker-react";
-import Feeling from "../../../../svg/Feeling";
+import EmojiPickers from "./EmojiPickers";
+import ImageViewer from "./ImageViewer";
 
 const CreatPostPopUp = () => {
-  const [pickerVisible, setPickerVisible] = useState(false);
+  const [text, setText] = useState("");
+  const [show, setShow] = useState(true);
+  const [image, setImage] = useState([]);
+
+  const textRef = useRef(null);
 
   return (
     <>
@@ -26,31 +30,28 @@ const CreatPostPopUp = () => {
               <span className="font-medium text-pink-100">User</span>?
             </h4>
           </div>
-          <div>
-            <textarea
-              className="w-full min-h-24 font-blinker font-medium text-base text-secondary_bg  rounded-md p-2 resize-none outline-none"
-              placeholder="Write something here..."
-            ></textarea>
-          </div>
-          <div className="flex items-center justify-between">
-            <div className="bg-gradient-to-r from-cyan-100 to-purple-100 h-10 w-10 rounded-lg"></div>
-            <div className="relative ">
-              <div
-                className="cursor-pointer"
-                onClick={() => setPickerVisible((prev) => !prev)}
-              >
-                <Feeling />
+          {!show ? (
+            <>
+              <EmojiPickers text={text} setText={setText} textRef={textRef} />
+              <div>
+                <AddPost />
               </div>
-              {pickerVisible && (
-                <div className="mt-2 absolute bottom-[30px] left-[-307px] cursor-pointer">
-                  <EmojiPicker />
-                </div>
-              )}
-            </div>
-          </div>
-          <div>
-            <AddPost />
-          </div>
+            </>
+          ) : (
+            <>
+              <ImageViewer
+                text={text}
+                setText={setText}
+                textRef={textRef}
+                image={image}
+                setImage={setImage}
+              />
+              <div>
+                <AddPost />
+              </div>
+            </>
+          )}
+
           <div>
             <button className="w-full bg-hover_color text-black_color font-blinker font-semibold text-base px-4 py-2 rounded-md mt-4 hover:bg-black_color hover:text-white_color transition-all ease-linear duration-200">
               Post
