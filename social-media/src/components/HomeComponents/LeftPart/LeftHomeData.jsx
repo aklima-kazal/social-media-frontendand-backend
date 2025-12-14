@@ -12,7 +12,7 @@ const LeftHomeData = ({ data }) => {
   });
   const SettingsSeperation = data.title === "Settings" && (
     <>
-      <div className="relative mb-0 lg:mb-40">
+      <div className="relative mb-0 lg:mb-8">
         <div
           to={data.to}
           onClick={() => setShowSettings(true)}

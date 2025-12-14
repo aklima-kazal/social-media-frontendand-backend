@@ -11,9 +11,7 @@ const Home = () => {
       </Helmet>
 
       <div className=" mt-8 ">
-        <div>
-          <HomePost />
-        </div>
+        <HomePost />
       </div>
     </>
   );

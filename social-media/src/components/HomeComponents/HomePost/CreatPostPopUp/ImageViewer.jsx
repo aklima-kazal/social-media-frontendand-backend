@@ -3,10 +3,25 @@ import EmojiPickers from "./EmojiPickers";
 import { CircleCloseIcon } from "../../../../svg/CircleClose";
 import { Media } from "../../../../svg/Media";
 
-const ImageViewer = ({ text, setText, textRef, image }) => {
+const ImageViewer = ({ text, setText, textRef, image, setImage }) => {
   const chooseFile = useRef(null);
-  const handleImageUpload = () => {
-    // Handle the uploaded files as needed
+  const handleImageUpload = (e) => {
+    const file = Array.from(e.target.files);
+    file.forEach((img) => {
+      if (
+        img.type !== "image/jpeg" &&
+        img.type !== "image/png" &&
+        img.type !== "image/webp" &&
+        img.type !== "image/gif"
+      ) {
+        console.log("s");
+      }
+      const readerFiles = new FileReader();
+      readerFiles.readAsDataURL(img);
+      readerFiles.onload = (renderImage) => {
+        setImage(() => [...image, renderImage.target.result]);
+      };
+    });
   };
   return (
     <>
@@ -21,16 +36,26 @@ const ImageViewer = ({ text, setText, textRef, image }) => {
           <input
             type="file"
             multiple
-            accept="image/jpeg, image/png, image.webp, image/gif"
+            accept="image/jpeg, image/png, image/webp, image/gif"
             ref={chooseFile}
             onChange={handleImageUpload}
             className="hidden"
           />
           {image && image.length ? (
-            ""
+            <div className="overflow-hidden w-full h-full">
+              {image.map((img, index) => (
+                <div key={index} className="">
+                  <img
+                    src={img}
+                    alt={`upload-${index}`}
+                    className="w-full h-full object-cover overflow-hidden rounded-md"
+                  />
+                </div>
+              ))}
+            </div>
           ) : (
             <div className="flex relative items-center justify-center h-full ">
-              <div className="absolute right-2 top-2 text-secondary_bg">
+              <div className="absolute right-2 top-2 text-secondary_bg cursor-pointer">
                 <CircleCloseIcon />
               </div>
               <div
@@ -46,6 +71,7 @@ const ImageViewer = ({ text, setText, textRef, image }) => {
                 <p className="font-blinker font-semibold text-base">
                   or Drag and drop photos here
                 </p>
+                <div></div>
               </div>
             </div>
           )}
