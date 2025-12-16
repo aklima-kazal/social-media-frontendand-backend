@@ -2,6 +2,7 @@ import React, { use, useRef } from "react";
 import EmojiPickers from "./EmojiPickers";
 import { CircleCloseIcon } from "../../../../svg/CircleClose";
 import { Media } from "../../../../svg/Media";
+import { CrossIcon } from "../../../../svg/Cross";
 
 const ImageViewer = ({ text, setText, textRef, image, setImage }) => {
   const chooseFile = useRef(null);
@@ -19,10 +20,11 @@ const ImageViewer = ({ text, setText, textRef, image, setImage }) => {
       const readerFiles = new FileReader();
       readerFiles.readAsDataURL(img);
       readerFiles.onload = (renderImage) => {
-        setImage(() => [...image, renderImage.target.result]);
+        setImage((images) => [...images, renderImage.target.result]);
       };
     });
   };
+  console.log(image);
   return (
     <>
       <EmojiPickers
@@ -32,7 +34,7 @@ const ImageViewer = ({ text, setText, textRef, image, setImage }) => {
         changePart
       />
       <div className="p-4 border border-hover_color rounded-md mt-4">
-        <div className="bg-input_color p-2 h-[280px] w-full rounded-md  text-secondary_bg font-blinker font-medium text-base">
+        <div className="bg-input_color p-2 h- w-full rounded-md  text-secondary_bg font-blinker font-medium text-base">
           <input
             type="file"
             multiple
@@ -42,20 +44,47 @@ const ImageViewer = ({ text, setText, textRef, image, setImage }) => {
             className="hidden"
           />
           {image && image.length ? (
-            <div className="overflow-hidden w-full h-full">
-              {image.map((img, index) => (
-                <div key={index} className="">
+            <div className="relative">
+              <div
+                onClick={() => chooseFile.current.click()}
+                className="absolute flex p-2 bg-main_bg rounded-md top-2 left-2 cursor-pointer hover:bg-hover_color gap-x-2"
+              >
+                <Media className="bg-main_bg" />
+                <span>Add Image Or Videos</span>
+              </div>
+              <div className="absolute right-2 top-2 text-secondary_bg cursor-pointer z-50 bg-main_bg h-8 w-8 p-1 rounded-full hover:bg-hover_color flex items-center justify-center">
+                <CrossIcon />
+              </div>
+              <div
+                className={`${
+                  image.length === 1
+                    ? "overflow-hidden h-full w-full "
+                    : image.length === 2
+                    ? "overflow-hidden w-full h-full grid grid-cols-2 gap-2"
+                    : image.length === 3
+                    ? "overflow-hidden w-full h-full grid grid-cols-2 gap-2"
+                    : image.length === 4
+                    ? "overflow-hidden w-full h-full grid grid-cols-2 gap-2 "
+                    : "overflow-hidden "
+                }`}
+              >
+                {image.map((img, index) => (
                   <img
                     src={img}
-                    alt={`upload-${index}`}
-                    className="w-full h-full object-cover overflow-hidden rounded-md"
+                    alt="img"
+                    className={`w-full h-full overflow-hidden rounded-md ${
+                      image.length === 3
+                        ? "[&:nth-of-type(1)]:row-start-1 [&:nth-of-type(1)]:row-end-3"
+                        : image.length === 4 &&
+                          "[&:nth-of-type(1)]:row-start-2 [&:nth-of-type(1)]:row-end-3"
+                    }`}
                   />
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           ) : (
-            <div className="flex relative items-center justify-center h-full ">
-              <div className="absolute right-2 top-2 text-secondary_bg cursor-pointer">
+            <div className="flex relative items-center justify-center h-full z-50 ">
+              <div className="absolute right-2 top-2 text-secondary_bg cursor-pointer z-50">
                 <CircleCloseIcon />
               </div>
               <div
@@ -71,7 +100,6 @@ const ImageViewer = ({ text, setText, textRef, image, setImage }) => {
                 <p className="font-blinker font-semibold text-base">
                   or Drag and drop photos here
                 </p>
-                <div></div>
               </div>
             </div>
           )}

@@ -13,8 +13,8 @@ const CreatPostPopUp = () => {
 
   return (
     <>
-      <div className="absolute bg-blur top-0 w-full h-screen z-50 flex justify-center items-center">
-        <div className="w-2/5 bg-white_color p-5 rounded-md shadow-md ">
+      <div className="absolute bg-blur top-0 w-full h-fit p-5 z-50 flex justify-center items-center ">
+        <div className="w-[32%] h-fit bg-white_color p-3 rounded-md shadow-md ">
           <div className="relative border-b-2 border-hover_color mb-2">
             <h4 className=" text-center mb-2 font-bold font-blinker text-text_color text-lg ">
               Creat Post
@@ -23,7 +23,7 @@ const CreatPostPopUp = () => {
               <CircleCloseIcon />
             </div>
           </div>
-          <div className="flex gap-x-2 items-center mb-4">
+          <div className="flex gap-x-2 items-center">
             <div className="flex items-center gap-3  h-10 w-10 rounded-full overflow-hidden bg-title_color"></div>
             <h4 className="font-blinker font-light text-text_color text-lg ">
               what's on your mind,{" "}

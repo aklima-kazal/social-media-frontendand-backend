@@ -20,7 +20,7 @@ const EmojiPickers = ({ text, setText, textRef, changePart }) => {
     textRef.current.selectionEnd = cursorPosition;
   }, [cursorPosition]);
   return (
-    <div className={`${changePart ? "flex  justify-between mt-2" : "mt-2"}`}>
+    <div className={`${changePart ? "flex  justify-between " : ""}`}>
       <div>
         <textarea
           value={text}
@@ -28,7 +28,7 @@ const EmojiPickers = ({ text, setText, textRef, changePart }) => {
           ref={textRef}
           className={`${
             changePart
-              ? "w-[230%] min-h-24 font-blinker font-medium text-base text-secondary_bg  rounded-md p-2 resize-none outline-none"
+              ? "w-[220%] min-h-16 font-blinker font-medium text-base text-secondary_bg  rounded-md p-2 resize-none outline-none"
               : "w-full min-h-24 font-blinker font-medium text-base text-secondary_bg  rounded-md p-2 resize-none outline-none"
           }`}
           placeholder="Write something here..."
@@ -45,7 +45,7 @@ const EmojiPickers = ({ text, setText, textRef, changePart }) => {
             </div>
             {pickerVisible && (
               <div className="flex items-center justify-between">
-                <div className="mt-2 absolute bottom-[30px] left-[-307px] cursor-pointer">
+                <div className="absolute top-[35px] left-[-307px] cursor-pointer z-50">
                   <EmojiPicker onEmojiClick={handleEmoji} />
                 </div>
               </div>
