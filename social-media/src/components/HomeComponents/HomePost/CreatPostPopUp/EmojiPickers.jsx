@@ -20,7 +20,7 @@ const EmojiPickers = ({ text, setText, textRef, changePart }) => {
     textRef.current.selectionEnd = cursorPosition;
   }, [cursorPosition]);
   return (
-    <div className={`${changePart ? "flex  justify-between " : ""}`}>
+    <div className={`${changePart ? "flex  justify-between " : " "}`}>
       <div>
         <textarea
           value={text}

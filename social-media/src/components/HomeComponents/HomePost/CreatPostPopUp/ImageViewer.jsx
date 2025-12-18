@@ -4,7 +4,7 @@ import { CircleCloseIcon } from "../../../../svg/CircleClose";
 import { Media } from "../../../../svg/Media";
 import { CrossIcon } from "../../../../svg/Cross";
 
-const ImageViewer = ({ text, setText, textRef, image, setImage }) => {
+const ImageViewer = ({ text, setText, textRef, image, setImage, setShow }) => {
   const chooseFile = useRef(null);
   const handleImageUpload = (e) => {
     const file = Array.from(e.target.files);
@@ -33,8 +33,8 @@ const ImageViewer = ({ text, setText, textRef, image, setImage }) => {
         textRef={textRef}
         changePart
       />
-      <div className="p-4 border border-hover_color rounded-md mt-4">
-        <div className="bg-input_color p-2 h- w-full rounded-md  text-secondary_bg font-blinker font-medium text-base">
+      <div className="p-4 border border-hover_color rounded-md mt-4 ">
+        <div className="bg-hover_color p-2 h-full w-full  rounded-md text-secondary_bg font-blinker font-medium text-base">
           <input
             type="file"
             multiple
@@ -52,27 +52,32 @@ const ImageViewer = ({ text, setText, textRef, image, setImage }) => {
                 <Media className="bg-main_bg" />
                 <span>Add Image Or Videos</span>
               </div>
-              <div className="absolute right-2 top-2 text-secondary_bg cursor-pointer z-50 bg-main_bg h-8 w-8 p-1 rounded-full hover:bg-hover_color flex items-center justify-center">
+              <div
+                onClick={() => setImage([])}
+                className="absolute right-2 top-2 text-secondary_bg cursor-pointer z-50 bg-main_bg h-8 w-8 p-1 rounded-full hover:bg-hover_color flex items-center justify-center"
+              >
                 <CrossIcon />
               </div>
               <div
                 className={`${
                   image.length === 1
-                    ? "overflow-hidden h-full w-full "
+                    ? "overflow-hidden w-full h-full "
                     : image.length === 2
                     ? "overflow-hidden w-full h-full grid grid-cols-2 gap-2"
                     : image.length === 3
                     ? "overflow-hidden w-full h-full grid grid-cols-2 gap-2"
                     : image.length === 4
                     ? "overflow-hidden w-full h-full grid grid-cols-2 gap-2 "
-                    : "overflow-hidden "
+                    : image.length >= 5
+                    ? "overflow-hidden w-full h-full grid grid-cols-2 gap-2 "
+                    : ""
                 }`}
               >
-                {image.map((img, index) => (
+                {image?.slice(0, 4).map((img, index) => (
                   <img
                     src={img}
                     alt="img"
-                    className={`w-full h-full overflow-hidden rounded-md ${
+                    className={`w-full h-full object-cover rounded-md ${
                       image.length === 3
                         ? "[&:nth-of-type(1)]:row-start-1 [&:nth-of-type(1)]:row-end-3"
                         : image.length === 4 &&
@@ -80,11 +85,21 @@ const ImageViewer = ({ text, setText, textRef, image, setImage }) => {
                     }`}
                   />
                 ))}
+                {image.length >= 5 && (
+                  <div className="absolute bottom-[60px] right-[85px] -translate-x-[50%] -translate-y-[50%] bg-main_bg h-8 w-8 rounded-full flex items-center justify-center">
+                    <span className="font-blinker font-medium text-base">
+                      +{image.length - 4}
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
           ) : (
-            <div className="flex relative items-center justify-center h-full z-50 ">
-              <div className="absolute right-2 top-2 text-secondary_bg cursor-pointer z-50">
+            <div className="flex relative items-center justify-center h-[400px] z-50 ">
+              <div
+                onClick={() => setShow(false)}
+                className="absolute right-2 top-2 text-secondary_bg cursor-pointer z-50"
+              >
                 <CircleCloseIcon />
               </div>
               <div

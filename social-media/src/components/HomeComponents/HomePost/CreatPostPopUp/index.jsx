@@ -6,15 +6,15 @@ import ImageViewer from "./ImageViewer";
 
 const CreatPostPopUp = () => {
   const [text, setText] = useState("");
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
   const [image, setImage] = useState([]);
 
   const textRef = useRef(null);
 
   return (
     <>
-      <div className="absolute bg-blur top-0 w-full h-fit p-5 z-50 flex justify-center items-center ">
-        <div className="w-[32%] h-fit bg-white_color p-3 rounded-md shadow-md ">
+      <div className="absolute bg-blur top-0 w-full z-20 flex justify-center items-center ">
+        <div className="w-[32%] mb-52 bg-white_color mt-20  p-3 rounded-md shadow-md ">
           <div className="relative border-b-2 border-hover_color mb-2">
             <h4 className=" text-center mb-2 font-bold font-blinker text-text_color text-lg ">
               Creat Post
@@ -33,9 +33,6 @@ const CreatPostPopUp = () => {
           {!show ? (
             <>
               <EmojiPickers text={text} setText={setText} textRef={textRef} />
-              <div>
-                <AddPost />
-              </div>
             </>
           ) : (
             <>
@@ -45,13 +42,13 @@ const CreatPostPopUp = () => {
                 textRef={textRef}
                 image={image}
                 setImage={setImage}
+                setShow={setShow}
               />
-              <div>
-                <AddPost />
-              </div>
             </>
           )}
-
+          <div>
+            <AddPost setShow={setShow} show={show} />
+          </div>
           <div>
             <button className="w-full bg-hover_color text-black_color font-blinker font-semibold text-base px-4 py-2 rounded-md mt-4 hover:bg-black_color hover:text-white_color transition-all ease-linear duration-200">
               Post
