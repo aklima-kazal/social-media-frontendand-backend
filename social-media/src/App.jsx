@@ -15,6 +15,7 @@ import LoggedInUser from "./pages/privateRouter/LoggedInUser";
 import RootLayout from "./components/RootLayout";
 import "swiper/css";
 import CreatPostPopUp from "./components/HomeComponents/HomePost/CreatPostPopUp";
+import ActivatePage from "./pages/Home/ActivatePage";
 
 function App() {
   const router = createBrowserRouter(
@@ -23,6 +24,7 @@ function App() {
         <Route element={<LoggedInUser />}>
           <Route element={<RootLayout />}>
             <Route path="/" element={<Home />} />
+            <Route path="/activate/:token" element={<ActivatePage />} />
           </Route>
         </Route>
         <Route element={<NotLoggedInUser />}>

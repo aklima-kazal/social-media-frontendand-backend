@@ -110,7 +110,7 @@ exports.verifiedUser = async (req, res) => {
         .json({ message: "Account has been verified successfully." });
     }
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(401).json({ message: "" });
   }
 };
 

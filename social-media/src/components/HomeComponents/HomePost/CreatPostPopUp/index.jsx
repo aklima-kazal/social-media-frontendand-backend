@@ -8,8 +8,10 @@ const CreatPostPopUp = () => {
   const [text, setText] = useState("");
   const [show, setShow] = useState(false);
   const [image, setImage] = useState([]);
+  const [isOpen, setIsOpen] = useState(true);
 
   const textRef = useRef(null);
+  if (!isOpen) return null;
 
   return (
     <>
@@ -19,7 +21,10 @@ const CreatPostPopUp = () => {
             <h4 className=" text-center mb-2 font-bold font-blinker text-text_color text-lg ">
               Creat Post
             </h4>
-            <div className="absolute -top-2 right-0 text-title_color cursor-pointer p-1 hover:bg-hover_color rounded-full">
+            <div
+              onClick={() => setIsOpen()}
+              className="absolute -top-2 right-0 text-title_color cursor-pointer p-1 hover:bg-hover_color rounded-full"
+            >
               <CircleCloseIcon />
             </div>
           </div>
