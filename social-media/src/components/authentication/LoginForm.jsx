@@ -89,7 +89,25 @@ const LoginForm = ({ toast }) => {
               {errors.password}
             </p>
           )}
-
+          <div className="flex justify-between items-center mt-4">
+            <p className="font-blinker font-medium text-text_color ">
+              Don't have an account?
+              <Link
+                to="/registration"
+                className="text-primary_color underline font-blinker font-normal ml-2"
+              >
+                Sign Up
+              </Link>
+            </p>
+            <p className="font-blinker font-medium text-text_color ">
+              <Link
+                to="/forget"
+                className="text-primary_color underline font-blinker font-normal ml-2"
+              >
+                Forget Password?
+              </Link>
+            </p>
+          </div>
           <div className="sm:flex items-center justify-between text-center mt-6 ">
             {isLoading ? (
               <button
@@ -107,16 +125,6 @@ const LoginForm = ({ toast }) => {
                 Login
               </button>
             )}
-
-            <p className="font-blinker font-medium text-text_color ">
-              Don't have an account?
-              <Link
-                to="/registration"
-                className="text-primary_color underline font-blinker font-normal ml-2"
-              >
-                Sign Up
-              </Link>
-            </p>
           </div>
         </form>
       </div>

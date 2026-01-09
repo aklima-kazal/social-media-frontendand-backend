@@ -15,7 +15,7 @@ const CreatPostPopUp = () => {
 
   return (
     <>
-      <div className="absolute bg-blur top-0 w-full z-20 flex justify-center items-center ">
+      <div className="absolute bg-blur left-0 top-0 w-full z-20 flex justify-center items-center ">
         <div className="w-[32%] mb-52 bg-white_color mt-20  p-3 rounded-md shadow-md ">
           <div className="relative border-b-2 border-hover_color mb-2">
             <h4 className=" text-center mb-2 font-bold font-blinker text-text_color text-lg ">

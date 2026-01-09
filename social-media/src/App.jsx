@@ -16,6 +16,7 @@ import RootLayout from "./components/RootLayout";
 import "swiper/css";
 import CreatPostPopUp from "./components/HomeComponents/HomePost/CreatPostPopUp";
 import ActivatePage from "./pages/Home/ActivatePage";
+import Forgetpassword from "./pages/ForgetPossword";
 
 function App() {
   const router = createBrowserRouter(
@@ -31,6 +32,7 @@ function App() {
           <Route path="/registration" element={<Registration />} />
           <Route path="/login" element={<Login />} />
         </Route>
+        <Route path="/forget" element={<Forgetpassword />} />
       </Route>
     )
   );
