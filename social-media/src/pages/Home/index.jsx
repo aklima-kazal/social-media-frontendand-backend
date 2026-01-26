@@ -4,7 +4,7 @@ import HomePost from "../../components/HomeComponents/HomePost";
 import ReAuth from "../../components/reauth";
 import { useSelector } from "react-redux";
 
-const Home = () => {
+const Home = ({ setVisible, posts }) => {
   const { userinfo } = useSelector((state) => state.registration);
   return (
     <>
@@ -13,7 +13,7 @@ const Home = () => {
       </Helmet>
       <div className=" mt-8 ">
         {userinfo.verified === false && <ReAuth userinfo={userinfo} />}
-        <HomePost />
+        <HomePost setVisible={setVisible} posts={posts} />
       </div>
     </>
   );

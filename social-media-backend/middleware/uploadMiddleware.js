@@ -21,7 +21,9 @@ module.exports = async (req, res, next) => {
     });
     next();
   } catch (error) {
-    res.status(404).json({ message: error.message });
+    console.log(error);
+
+    res.status(404).json({ message: "Something went wrong" });
   }
 };
 const removeFile = (path) => {

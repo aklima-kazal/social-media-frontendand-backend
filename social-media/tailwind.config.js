@@ -28,6 +28,7 @@ export default {
       "purple-100": "var(--purple-100)",
       "pink-100": "var(--pink-100)",
       "cyan-100": "var(--cyan-100)",
+      transparent: "var(--transparent)",
     },
 
     // fontFamily: {
@@ -38,6 +39,7 @@ export default {
     //   blinkerBlack: ["Blinker Black"],
     //   blinkerSemiBold: ["Blinker SemiBold"],
     // },
+
     extend: {
       screens: {
         xs: "320px",

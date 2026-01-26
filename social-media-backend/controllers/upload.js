@@ -1,6 +1,5 @@
-const fs = require("fs");
 const cloudinary = require("cloudinary");
-
+const fs = require("fs");
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -9,7 +8,7 @@ cloudinary.config({
 });
 exports.uploadImages = async (req, res) => {
   try {
-    const { path } = req.body;
+    const { path } = req.body || {};
     const files = Object.values(req.files).flat();
     const images = [];
     for (const file of files) {
@@ -31,12 +30,11 @@ const uploadToCloudinary = async (file, path) => {
         folder: path,
       },
       (err, res) => {
-        console.log(err);
         if (err) {
           removeFile(file.tempFilePath);
           return res
-            .status(500)
-            .send({ message: "Upload to cloudinary failed" });
+            .status(404)
+            .json({ message: "Upload to cloudinary failed" });
         }
         resolve({
           url: res.secure_url,

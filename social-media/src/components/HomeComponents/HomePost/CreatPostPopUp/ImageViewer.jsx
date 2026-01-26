@@ -4,10 +4,18 @@ import { CircleCloseIcon } from "../../../../svg/CircleClose";
 import { Media } from "../../../../svg/Media";
 import { CrossIcon } from "../../../../svg/Cross";
 
-const ImageViewer = ({ text, setText, textRef, image, setImage, setShow }) => {
+const ImageViewer = ({
+  text,
+  setText,
+  textRef,
+  image,
+  setImage,
+  setShow,
+  setError,
+}) => {
   const chooseFile = useRef(null);
   const handleImageUpload = (e) => {
-    const file = Array.from(e.target.files);
+    let file = Array.from(e.target.files);
     file.forEach((img) => {
       if (
         img.type !== "image/jpeg" &&
@@ -15,7 +23,13 @@ const ImageViewer = ({ text, setText, textRef, image, setImage, setShow }) => {
         img.type !== "image/webp" &&
         img.type !== "image/gif"
       ) {
-        console.log("s");
+        file = file.filter((item) => item.name !== img.name);
+        setError(`${img.name} This file format is not supported.`);
+        return;
+      } else if (img.size > 1024 * 1024 * 5) {
+        file = file.filter((item) => item.name !== img.name);
+        setError(`${img.name} File size exceeds 5MB.`);
+        return;
       }
       const readerFiles = new FileReader();
       readerFiles.readAsDataURL(img);
@@ -63,14 +77,14 @@ const ImageViewer = ({ text, setText, textRef, image, setImage, setShow }) => {
                   image.length === 1
                     ? "overflow-hidden w-full h-full "
                     : image.length === 2
-                    ? "overflow-hidden w-full h-full grid grid-cols-2 gap-2"
-                    : image.length === 3
-                    ? "overflow-hidden w-full h-full grid grid-cols-2 gap-2"
-                    : image.length === 4
-                    ? "overflow-hidden w-full h-full grid grid-cols-2 gap-2 "
-                    : image.length >= 5
-                    ? "overflow-hidden w-full h-full grid grid-cols-2 gap-2 "
-                    : ""
+                      ? "overflow-hidden w-full h-full grid grid-cols-2 gap-2"
+                      : image.length === 3
+                        ? "overflow-hidden w-full h-full grid grid-cols-2 gap-2"
+                        : image.length === 4
+                          ? "overflow-hidden w-full h-full grid grid-cols-2 gap-2 "
+                          : image.length >= 5
+                            ? "overflow-hidden w-full h-full grid grid-cols-2 gap-2 "
+                            : ""
                 }`}
               >
                 {image?.slice(0, 4).map((img, index) => (
@@ -95,7 +109,7 @@ const ImageViewer = ({ text, setText, textRef, image, setImage, setShow }) => {
               </div>
             </div>
           ) : (
-            <div className="flex relative items-center justify-center h-[400px] z-50 ">
+            <div className="flex relative items-center justify-center z-50 ">
               <div
                 onClick={() => setShow(false)}
                 className="absolute right-2 top-2 text-secondary_bg cursor-pointer z-50"

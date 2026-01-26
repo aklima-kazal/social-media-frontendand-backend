@@ -29,6 +29,7 @@
   --purple-100: #f3e8ff;
   --pink-100: #f697c9;
   --cyan-100: #cffafe;
+  --transparent: transparent;
 }
 
 /* font faces */
@@ -57,3 +58,27 @@
   font-family: "Blinker SemiBold";
   src: url(./assets/fonts/Blinker-SemiBold.ttf) format("truetype");
 } */
+.bgPost {
+  height: 350px;
+  width: 100%;
+  background-size: cover;
+}
+
+.bgPost textarea {
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  font-size: 30px;
+  height: 100%;
+}
+.postError {
+  animation: postErrorAnim 0.4s ease-in-out forwards;
+}
+@keyframes postErrorAnim {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}

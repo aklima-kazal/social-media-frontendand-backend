@@ -74,6 +74,7 @@ exports.newUser = async (req, res) => {
     }).save();
 
     const emailToken = jwtToken({ id: user._id.toString() }, "30m");
+
     const url = `${process.env.BASE_URL}/activate/${emailToken}`;
 
     sendVerifiedEmail(user.email, user.fName, url);
@@ -91,7 +92,6 @@ exports.newUser = async (req, res) => {
       message: "User created successfully",
     });
   } catch (error) {
-    console.log(error);
     res.status(500).json({ message: error.message });
   }
 };

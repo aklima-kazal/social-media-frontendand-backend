@@ -4,6 +4,14 @@ export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_BACKEND_URL,
+    prepareHeaders: (headers) => {
+      const user = JSON.parse(localStorage.getItem("user.token"));
+
+      if (user && user.token) {
+        headers.set("Authorization", `Bearer ${token}`);
+      }
+      return headers;
+    },
   }),
   endpoints: (builder) => ({
     addUser: builder.mutation({
@@ -67,6 +75,33 @@ export const authApi = createApi({
         body: { email, password },
       }),
     }),
+    createPost: builder.mutation({
+      query: ({ type, images, text, background, user, token }) => ({
+        url: "/api/v1/posts/createpost",
+        method: "POST",
+        body: { type, images, text, background, user },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+      transformResponse: (response) => ({
+        status: "success",
+        data: response,
+      }),
+    }),
+    uploadImage: builder.mutation({
+      query: ({ formData, path, token }) => ({
+        url: "/api/v1/upload/uploadimage",
+        method: "POST",
+        body: formData,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+    }),
+    getAllPosts: builder.query({
+      query: () => "/api/v1/posts/getallposts",
+    }),
   }),
 });
 
@@ -79,4 +114,7 @@ export const {
   useSendCodeMutation,
   useVerifyCodeMutation,
   useChangePasswordMutation,
+  useCreatePostMutation,
+  useUploadImageMutation,
+  useGetAllPostsQuery,
 } = authApi;

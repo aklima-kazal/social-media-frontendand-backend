@@ -3,11 +3,14 @@ import Header from "./Header";
 import { LiveIcon } from "../../../svg/Live";
 import { Media } from "../../../svg/Media";
 
-const HomePost = () => {
+const HomePost = ({ setVisible, posts }) => {
   return (
     <>
       <div className="bg-blur px-6 py-12 rounded-lg gap-x-2 shadow-lg">
-        <div className="w-full rounded-full p-2 bg-white_color flex gap-x-4 items-center">
+        <div
+          className="w-full rounded-full p-2 bg-white_color flex gap-x-4 items-center"
+          onClick={() => setVisible(true)}
+        >
           <div className="h-11 w-11 rounded-full bg-hover_color"></div>
           <input
             type="text"
@@ -32,7 +35,11 @@ const HomePost = () => {
           </div>
         </div>
       </div>
-      <div></div>
+      <div>
+        {posts?.map((item) => (
+          <p>{item?._id}</p>
+        ))}
+      </div>
     </>
   );
 };
