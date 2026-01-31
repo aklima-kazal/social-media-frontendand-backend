@@ -19,7 +19,7 @@ const ActivatePage = () => {
 
   useEffect(() => {
     activateUser();
-  }, []);
+  }, [token, userinfo]);
 
   const activateUser = async () => {
     try {
@@ -32,7 +32,7 @@ const ActivatePage = () => {
       setError("");
       localStorage.setItem(
         "user",
-        JSON.stringify({ ...userinfo, verified: true })
+        JSON.stringify({ ...userinfo, verified: true }),
       );
       dispatch(loggedInUsers({ ...userinfo, verified: true }));
       setTimeout(() => {

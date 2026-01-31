@@ -6,7 +6,7 @@ exports.authUser = async (req, res, next) => {
     let token = temporary ? temporary.slice(7, temporary.length) : "";
 
     if (!token) {
-      return res.status(401).json({ message: "Unauthorized" });
+      return res.status(401).json({ message: "this is not a valid token" });
     }
     jwt.verify(token, process.env.SECRET_TOKEN, (err, user) => {
       if (err) {
@@ -16,8 +16,6 @@ exports.authUser = async (req, res, next) => {
       next();
     });
   } catch (err) {
-    console.log(err);
-
-    res.status(401).json({ message: "Unauthorized" });
+    res.status(401).json({ message: "not authorized" });
   }
 };

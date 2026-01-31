@@ -5,10 +5,10 @@ export const authApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_BACKEND_URL,
     prepareHeaders: (headers) => {
-      const user = JSON.parse(localStorage.getItem("user.token"));
+      const user = JSON.parse(localStorage.getItem("user"));
 
-      if (user && user.token) {
-        headers.set("Authorization", `Bearer ${token}`);
+      if (user && user?.token) {
+        headers.set("Authorization", `Bearer ${user.token}`);
       }
       return headers;
     },
@@ -29,7 +29,7 @@ export const authApi = createApi({
       }),
     }),
     verifiedUser: builder.mutation({
-      query: (token, userToken) => ({
+      query: ({ token, userToken }) => ({
         url: "/api/v1/auth/activate",
         method: "POST",
         body: { token },

@@ -87,8 +87,8 @@ exports.newUser = async (req, res) => {
       fName: user.fName,
       lName: user.lName,
       profilePicture: user.profilePicture,
-      verified: user.verified,
       token: token,
+      verified: user.verified,
       message: "User created successfully",
     });
   } catch (error) {
@@ -102,8 +102,9 @@ exports.verifiedUser = async (req, res) => {
     const { token } = req.body;
     const user = jwt.verify(token, process.env.SECRET_TOKEN);
     const check = await Users.findById(user.id);
+
     if (verified !== user.id) {
-      return res.status(400).json({ message: "Unauthorized" });
+      return res.status(400).json({ message: "This user does not exist." });
     }
 
     if (check.verified === true) {
@@ -112,12 +113,12 @@ exports.verifiedUser = async (req, res) => {
         .json({ message: "This account is already verified." });
     } else {
       await Users.findByIdAndUpdate(user.id, { verified: true });
-      res
+      return res
         .status(200)
         .json({ message: "Account has been verified successfully." });
     }
   } catch (error) {
-    res.status(401).json({ message: "" });
+    res.status(401).json({ message: error.message });
   }
 };
 
@@ -143,7 +144,7 @@ exports.login = async (req, res) => {
       profilePicture: user.profilePicture,
       verified: user.verified,
       token: token,
-      message: "User created successfully",
+      message: "logged in successfully",
     });
   } catch (error) {
     res.status(400).json({ message: error.message });

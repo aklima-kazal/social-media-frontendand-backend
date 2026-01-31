@@ -22,7 +22,6 @@ import { useGetAllPostsQuery } from "./feature/api/authApi";
 function App() {
   const [visible, setVisible] = useState(false);
   const { data: posts } = useGetAllPostsQuery();
-  console.log(posts);
 
   const router = createBrowserRouter(
     createRoutesFromElements(

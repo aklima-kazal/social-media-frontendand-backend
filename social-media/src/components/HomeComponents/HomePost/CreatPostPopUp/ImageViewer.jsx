@@ -38,7 +38,7 @@ const ImageViewer = ({
       };
     });
   };
-  console.log(image);
+
   return (
     <>
       <EmojiPickers
