@@ -8,8 +8,8 @@ exports.authUser = async (req, res, next) => {
     if (!token) {
       return res.status(401).json({ message: "this is not a valid token" });
     }
-    jwt.verify(token, process.env.SECRET_TOKEN, (err, user) => {
-      if (err) {
+    jwt.verify(token, process.env.SECRET_TOKEN, (error, user) => {
+      if (error) {
         return res.status(401).json({ message: "Unauthorized" });
       }
       req.user = user;

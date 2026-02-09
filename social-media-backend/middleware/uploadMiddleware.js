@@ -9,6 +9,7 @@ module.exports = async (req, res, next) => {
       if (
         files.mimetype !== "image/jpeg" &&
         files.mimetype !== "image/png" &&
+        files.mimetype !== "image/webp" &&
         files.mimetype !== "image/gif"
       ) {
         removeFile(files.tempFilePath);

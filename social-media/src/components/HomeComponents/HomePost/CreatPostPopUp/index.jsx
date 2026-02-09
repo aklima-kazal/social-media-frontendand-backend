@@ -4,7 +4,10 @@ import AddPost from "./AddPost";
 import EmojiPickers from "./EmojiPickers";
 import ImageViewer from "./ImageViewer";
 import clickOutside from "../../../../feature/function/click";
-import { useCreatePostMutation } from "../../../../feature/api/authApi";
+import {
+  useCreatePostMutation,
+  useUploadImageMutation,
+} from "../../../../feature/api/authApi";
 import { useSelector } from "react-redux";
 import { PulseLoader } from "react-spinners";
 import PostError from "./PostError";
@@ -17,7 +20,7 @@ const CreatPostPopUp = ({ setVisible }) => {
   const [background, setBackground] = useState("");
   const { userinfo } = useSelector((state) => state.registration);
   const [loading, setLoading] = useState(false);
-  const [uploadImage] = useCreatePostMutation();
+  const [uploadImage] = useUploadImageMutation();
 
   const [error, setError] = useState("");
   const [createPost] = useCreatePostMutation();
@@ -40,18 +43,18 @@ const CreatPostPopUp = ({ setVisible }) => {
           user: userinfo.id,
           token: userinfo.token,
         }).unwrap();
-      } else if (image && image.length) {
-        const postImages = image.map((item) => dataURItoBlob(item));
-        const path = `${userinfo.username}/post_images`;
+      } else if (image && image?.length) {
+        const postImages = image?.map((item) => dataURItoBlob(item));
+        const path = `${userinfo?.username}/post_images`;
         let formData = new FormData();
-        formData.append("path", path);
-        postImages.forEach((img) => {
-          formData.append("file", img);
+        formData?.append("path", path);
+        postImages?.forEach((img) => {
+          formData?.append("file", img);
         });
         const responseImage = await uploadImage({
           formData,
           path,
-          token: userinfo.token,
+          token: userinfo?.token,
         }).unwrap();
 
         response = await createPost({
@@ -59,13 +62,13 @@ const CreatPostPopUp = ({ setVisible }) => {
           images: responseImage,
           text,
           background: null,
-          user: userinfo.id,
-          token: userinfo.token,
+          user: userinfo?.id,
+          token: userinfo?.token,
         }).unwrap();
       } else if (text) {
         response = await createPost({
           type: null,
-          images: responseImage,
+          images: null,
           text,
           background: null,
           user: userinfo.id,
@@ -141,7 +144,7 @@ const CreatPostPopUp = ({ setVisible }) => {
           </div>
 
           <div>
-            {text == "" && image.length == 0 ? (
+            {text == "" && image?.length == 0 ? (
               <button
                 disabled
                 className="w-full bg-hover_color text-black_color font-blinker font-semibold text-base px-4 py-2 rounded-md mt-4 "

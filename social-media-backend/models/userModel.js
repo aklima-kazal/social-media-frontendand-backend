@@ -89,6 +89,6 @@ const UserModel = new Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 module.exports = mongoose.model("usermodel", UserModel);

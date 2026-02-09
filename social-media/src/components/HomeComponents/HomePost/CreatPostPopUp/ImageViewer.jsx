@@ -1,4 +1,4 @@
-import React, { use, useRef } from "react";
+import React, { useRef } from "react";
 import EmojiPickers from "./EmojiPickers";
 import { CircleCloseIcon } from "../../../../svg/CircleClose";
 import { Media } from "../../../../svg/Media";
@@ -23,7 +23,7 @@ const ImageViewer = ({
         img.type !== "image/webp" &&
         img.type !== "image/gif"
       ) {
-        file = file.filter((item) => item.name !== img.name);
+        file = file?.filter((item) => item.name !== img.name);
         setError(`${img.name} This file format is not supported.`);
         return;
       } else if (img.size > 1024 * 1024 * 5) {
@@ -34,7 +34,7 @@ const ImageViewer = ({
       const readerFiles = new FileReader();
       readerFiles.readAsDataURL(img);
       readerFiles.onload = (renderImage) => {
-        setImage((images) => [...images, renderImage.target.result]);
+        setImage((images) => [...images, renderImage?.target?.result]);
       };
     });
   };
@@ -57,7 +57,7 @@ const ImageViewer = ({
             onChange={handleImageUpload}
             className="hidden"
           />
-          {image && image.length ? (
+          {image && image?.length ? (
             <div className="relative">
               <div
                 onClick={() => chooseFile.current.click()}
@@ -87,8 +87,9 @@ const ImageViewer = ({
                             : ""
                 }`}
               >
-                {image?.slice(0, 4).map((img, index) => (
+                {image?.slice(0, 4)?.map((img, index) => (
                   <img
+                    key={index}
                     src={img}
                     alt="img"
                     className={`w-full h-full object-cover rounded-md ${
@@ -99,10 +100,10 @@ const ImageViewer = ({
                     }`}
                   />
                 ))}
-                {image.length >= 5 && (
+                {image?.length >= 5 && (
                   <div className="absolute bottom-[60px] right-[85px] -translate-x-[50%] -translate-y-[50%] bg-main_bg h-8 w-8 rounded-full flex items-center justify-center">
                     <span className="font-blinker font-medium text-base">
-                      +{image.length - 4}
+                      +{image?.length - 4}
                     </span>
                   </div>
                 )}

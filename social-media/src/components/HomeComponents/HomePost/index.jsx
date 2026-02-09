@@ -1,18 +1,25 @@
-import React from "react";
+import React, { use, useRef } from "react";
 import Header from "./Header";
 import { LiveIcon } from "../../../svg/Live";
 import { Media } from "../../../svg/Media";
+import ShowPost from "./showPost";
 
 const HomePost = ({ setVisible, posts }) => {
+  const removeFocus = useRef(null);
+  removeFocus.current?.blur();
+  const handleVisible = () => {
+    setVisible(true);
+  };
   return (
     <>
       <div className="bg-blur px-6 py-12 rounded-lg gap-x-2 shadow-lg">
         <div
           className="w-full rounded-full p-2 bg-white_color flex gap-x-4 items-center"
-          onClick={() => setVisible(true)}
+          onClick={handleVisible}
         >
           <div className="h-11 w-11 rounded-full bg-hover_color"></div>
           <input
+            ref={removeFocus}
             type="text"
             className="p-2 outline-none rounded-lg w-[90%] "
             placeholder="Hello World"
@@ -35,9 +42,9 @@ const HomePost = ({ setVisible, posts }) => {
           </div>
         </div>
       </div>
-      <div>
+      <div className="mt-6 bg-red rounded-lg shadow-lg">
         {posts?.map((item) => (
-          <p>{item?._id}</p>
+          <ShowPost key={item?._id} post={item} />
         ))}
       </div>
     </>

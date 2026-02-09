@@ -19,7 +19,7 @@ const ActivatePage = () => {
 
   useEffect(() => {
     activateUser();
-  }, [token, userinfo]);
+  }, []);
 
   const activateUser = async () => {
     try {

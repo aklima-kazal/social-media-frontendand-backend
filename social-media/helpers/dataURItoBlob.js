@@ -1,7 +1,6 @@
-// Converts a data URI to a Blob object
-
 export default function dataURItoBlob(dataURI) {
-  console.log(dataURI);
+  // Converts a data URI to a Blob object
+
   var byteString;
   if (dataURI.split(",")[0].indexOf("base64") >= 0)
     byteString = atob(dataURI.split(",")[1]);
