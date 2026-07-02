@@ -7,58 +7,58 @@ const UserModel = new Schema(
   {
     fName: {
       type: String,
-      required: true,
+      require: true,
       trim: true,
       text: true,
     },
     lName: {
       type: String,
-      required: true,
+      require: true,
       trim: true,
       text: true,
     },
     username: {
       type: String,
-      required: true,
+      require: true,
       trim: true,
       text: true,
       unique: true,
     },
     email: {
       type: String,
-      required: true,
+      require: true,
       trim: true,
     },
     password: {
       type: String,
-      required: true,
+      require: true,
     },
     profilePicture: { type: String, default: "" },
-    coverPhoto: { type: String, default: "" },
-    bMonth: { type: Number, trim: true, required: true },
-    bDay: { type: Number, trim: true, required: true },
-    bYear: { type: Number, trim: true, required: true },
-    gender: { type: String, trim: true, required: true },
+    cover: { type: String, trim: true },
+    bMonth: { type: Number, trim: true, require: true },
+    bDay: { type: Number, trim: true, require: true },
+    bYear: { type: Number, trim: true, require: true },
+    gender: { type: String, require: true },
     verified: { type: Boolean, default: false },
     friends: [{ type: ObjectId, ref: "usermodel" }],
     followers: [{ type: ObjectId, ref: "usermodel" }],
     following: [{ type: ObjectId, ref: "usermodel" }],
-    requests: [{ type: ObjectId, ref: "usermodel" }],
+    request: [{ type: ObjectId, ref: "usermodel" }],
     search: [
       {
         user: {
           type: ObjectId,
           ref: "usermodel",
-          required: true,
+          require: true,
           text: true,
         },
         createdAt: {
           type: Date,
-          required: true,
+          require: true,
         },
       },
     ],
-    detaiils: {
+    details: {
       bio: { type: String },
       otherName: { type: String },
       job: { type: String },
@@ -80,10 +80,10 @@ const UserModel = new Schema(
       },
       instagram: { type: String },
     },
-    savedPosts: [
+    savedPost: [
       {
-        post: { type: ObjectId, ref: "postmodel" },
-        savedAt: { type: Date, required: false },
+        post: { type: ObjectId, ref: "post" },
+        savedAt: { type: Date, require: true },
       },
     ],
   },

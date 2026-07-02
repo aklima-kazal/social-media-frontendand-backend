@@ -39,6 +39,10 @@ const postModel = new Schema({
       },
     },
   ],
+  createdAt: {
+    type: Date,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("post", postModel);

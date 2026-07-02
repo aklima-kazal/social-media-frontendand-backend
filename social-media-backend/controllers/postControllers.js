@@ -11,10 +11,9 @@ exports.createPost = async (req, res) => {
 
 exports.getAllPosts = async (req, res) => {
   try {
-    const post = await Post.find().populate(
-      "user",
-      "profilePicture coverPhoto fName lName username",
-    );
+    const post = await Post.find();
+    // .populate("user", "profilePicture coverPhoto fName lName username")
+    // .sort({ createdAt: -1 });
     res.json(post);
   } catch (error) {
     res.status(404).json({ message: error.message });

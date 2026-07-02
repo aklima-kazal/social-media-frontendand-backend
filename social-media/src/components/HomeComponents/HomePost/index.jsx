@@ -42,9 +42,9 @@ const HomePost = ({ setVisible, posts }) => {
           </div>
         </div>
       </div>
-      <div className="mt-6 bg-red rounded-lg shadow-lg">
+      <div className="mt-6 bg-white_color rounded-lg shadow-lg">
         {posts?.map((item) => (
-          <ShowPost key={item?._id} post={item} />
+          <ShowPost key={item._id} post={item} />
         ))}
       </div>
     </>

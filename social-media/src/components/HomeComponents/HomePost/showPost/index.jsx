@@ -1,9 +1,29 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import avaterImage from "../../../../assets/defaultImage/avatar.png";
 import { formatDistance } from "date-fns";
+import { Dot } from "../../../../svg/Dots";
 
-const ShowPost = ({ post }) => {
+const ShowPost = ({ posts, post }) => {
+  const removeFocus = useRef(null);
+  removeFocus.current?.blur();
+  const getTimeAgo = (value) => {
+    try {
+      if (!value) return "No date";
+
+      const d = new Date(value);
+      if (isNaN(d.getTime())) return "No date";
+
+      const diffSeconds = (Date.now() - d.getTime()) / 1000;
+
+      if (diffSeconds < 60) return "Just now";
+
+      return formatDistance(d, new Date(), { addSuffix: true });
+    } catch {
+      return "No date";
+    }
+  };
+
   return (
     <>
       <div className="p-4 w-full mb-6">
@@ -25,12 +45,25 @@ const ShowPost = ({ post }) => {
                 </h1>
               </Link>
               <p className="font-blinker font-normal text-sm text-gray-500">
-                {formatDistance(new Date(post.createdAt), { addSuffix: true })}
+                {getTimeAgo(post?.createdAt, new Date(), { addSuffix: true })}
               </p>
             </div>
           </div>
-          <div>ddddddd</div>
+          <div className="cursor-pointer text-blue hover:bg-hover_color rounded-full p-2">
+            <Dot />
+          </div>
         </div>
+        {post?.background ? (
+          <div
+            className="h-72 w-full rounded-lg mt-4 flex items-center justify-center text-white_color font-blinker font-bold text-2xl"
+            style={{
+              backgroundImage: `url(${post?.background})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+            }}
+          ></div>
+        ) : null}
       </div>
     </>
   );
